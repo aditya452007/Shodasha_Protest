@@ -20,11 +20,10 @@ const envSchema = z.object({
     .string()
     .default('postgresql://postgres.exudczlqdvotyvbivmox:Mgp4XTx%408RgEb74@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require'),
   REDIS_URL: z.string().default('redis://localhost:6379'),
-  CORS_ORIGIN: z.string().default('http://localhost:3000'),
+  CORS_ORIGIN: z.string().default('http://localhost:3000').transform((str) => str.split(',').map(s => s.trim())),
   COOKIE_SECRET: z.string().default('shodasha-protest-anonymous-secret-key-32charsmin'),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
 });
-
 const parseEnv = () => {
   const result = envSchema.safeParse(process.env);
   if (!result.success) {
