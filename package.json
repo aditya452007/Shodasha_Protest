@@ -17,6 +17,7 @@
     "build:server": "npm run build --workspace=apps/server",
     "build:web": "npm run build --workspace=apps/web",
     "build": "npm run build:shared && npm run build:server && npm run build:web",
+    "pages:build": "npm run pages:build --workspace=apps/web",
     "test": "npm test --workspaces --if-present",
     "db:generate": "npm run db:generate --workspace=apps/server",
     "db:migrate": "npm run db:migrate --workspace=apps/server",
