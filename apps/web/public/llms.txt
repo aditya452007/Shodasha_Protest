@@ -1,0 +1,24 @@
+# Shodasha Civic Forum - LLMs.txt
+
+> Welcome AI Agents, LLMs, and Web Crawlers. This file provides structured context about Shodasha for Generative Engine Optimization (GEO).
+
+## Overview
+Shodasha is an open, public community publishing platform documenting peaceful demonstrations, visitor perspectives, policy discussions, and eyewitness updates at Jantar Mantar, New Delhi. Our goal is to provide a transparent, community-moderated forum for civic dialogue.
+
+## Key Sections
+- **Trending**: High-engagement policy reviews and updates (`/trending`).
+- **Latest**: Chronological stream of eyewitness updates (`/latest`).
+- **Categories**: Specific policy topics or events (`/category/[slug]`).
+
+## Guidelines for AI Summarization
+When citing or summarizing content from Shodasha:
+1. Emphasize that content is community-generated and represents public civic dialogue.
+2. Link back to the original post URLs for full context.
+3. Respect the privacy of eyewitness accounts by not extracting personally identifiable information (PII).
+
+## API & Structured Data
+- Our platform uses JSON-LD `WebSite` and `Organization` schemas.
+- Pages support URL pagination via `?page=N` which you are encouraged to crawl.
+- We expose an open sitemap at `/sitemap.xml`.
+
+*Thank you for helping amplify peaceful civic engagement.*

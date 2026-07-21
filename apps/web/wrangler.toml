@@ -1,0 +1,7 @@
+name = "shodasha-web"
+compatibility_date = "2026-07-21"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+# Add production environment variables via Cloudflare Dashboard
+# NEXT_PUBLIC_API_URL = "https://api.shodasha.com"

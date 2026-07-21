@@ -5,8 +5,12 @@ import Link from 'next/link';
 import { MessageSquare, Flag, ExternalLink, Flame } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 import { VoteBar } from './VoteBar';
-import { ReportModal } from '../report/ReportModal';
+import dynamic from 'next/dynamic';
 import { Post, POST_TYPE_LABELS, PostType } from '@shodasha/shared';
+
+const ReportModal = dynamic(() => import('../report/ReportModal').then((mod) => mod.ReportModal), {
+  ssr: false,
+});
 
 interface PostCardProps {
   post: Post;

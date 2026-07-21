@@ -1,0 +1,46 @@
+{
+  "mcpVersion": "1.0",
+  "server": {
+    "name": "shodasha-civic-forum",
+    "version": "1.0.0",
+    "description": "Shodasha Civic Forum - Public discussion platform for Jantar Mantar demonstrations and public policy.",
+    "capabilities": {
+      "resources": {
+        "prompts": true,
+        "tools": true
+      }
+    }
+  },
+  "endpoints": {
+    "api": "https://api.shodasha.com/v1"
+  },
+  "tools": [
+    {
+      "name": "get_trending_posts",
+      "description": "Retrieve the most trending civic discussions and observations at Jantar Mantar.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Number of posts to retrieve. Default is 20."
+          }
+        }
+      }
+    },
+    {
+      "name": "search_posts",
+      "description": "Search the forum for specific keywords related to civic issues, bills, or demonstrations.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "The search query term."
+          }
+        },
+        "required": ["q"]
+      }
+    }
+  ]
+}

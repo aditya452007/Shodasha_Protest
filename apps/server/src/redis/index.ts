@@ -31,7 +31,7 @@ redis.on('error', (_err) => {
 });
 
 redis.on('connect', () => {
-  console.log('Connected to Redis server');
+  // Silent connection for production cleanliness
   isErrorLogged = false;
 });
 
