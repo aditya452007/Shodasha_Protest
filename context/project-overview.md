@@ -2,29 +2,31 @@
 
 ## Overview
 
-[Replace with project description — what does this project do? Who is it for? What problem does it solve?]
+Shodasha Protest is a complete, production-ready anonymous citizen journalism platform focused on sharing, reading, discussing, voting on, and reporting updates related to education protests in Delhi. The platform is designed for open public participation while remaining secure, performant, scalable, privacy-conscious, and easy to maintain.
 
-## Goals
+## Project Goals
 
-1. [Goal 1 — e.g., Establish brand presence]
-2. [Goal 2 — e.g., Showcase products/services]
-3. [Goal 3 — e.g., Convert visitors into leads/customers]
-4. [Goal 4 — e.g., Demonstrate technical excellence]
+1. **Anonymous Citizen Journalism**: Enable instant posting, commenting, and browsing of education protest updates in Delhi without registration, authentication, login, or admin dashboards.
+2. **High Security & Privacy**: Enforce strict input validation, HTML stripping, URL scheme verification, anonymous fingerprinting, and zero storage of plain PII.
+3. **High Performance & Concurrency**: Support 1,000+ concurrent users with <300ms cold responses and <100ms cached responses.
+4. **Spam & Abuse Prevention**: Protect against automated bots and spammers using honeypots, duplicate content hashes, sliding-window rate limits, and community report thresholds.
+5. **Realtime Engagement**: Serve live updates via Server-Sent Events (SSE) and fast full-text search (FTS) using PostgreSQL native indexes.
 
 ## Core User Flow
 
-1. [Step 1 — e.g., Visitor lands on homepage]
-2. [Step 2 — e.g., Browses services/products]
-3. [Step 3 — e.g., Reads about the team/company]
-4. [Step 4 — e.g., Contacts or makes a purchase]
-5. [Step 5 — e.g., Receives confirmation]
+1. Visitor opens homepage (`/`), views top trending protest updates and category navigation.
+2. Visitor filters by category or searches posts using full-text search (`/search?q=...`).
+3. Visitor creates a post (`/create`) anonymously with title (max 120 chars), body (max 1500 chars), category, and optional HTTPS links (max 3).
+4. Visitor reads post detail (`/posts/[id]`), views comments, and adds an anonymous plain-text comment (max 300 chars).
+5. Visitor votes on posts (upvote/downvote) or reports inappropriate content.
 
 ## Target Audience
 
-[Describe the target audience — demographics, needs, pain points]
+Delhi students, researchers, educators, activists, journalists, and concerned citizens seeking real-time, unfiltered, privacy-preserving education protest updates and discussions.
 
 ## Success Metrics
 
-- [Metric 1 — e.g., Lighthouse score >90 across all categories]
-- [Metric 2 — e.g., Conversion rate]
-- [Metric 3 — e.g., Page load time <2s]
+- **Performance**: Cold API response < 300 ms, Cached response < 100 ms.
+- **Capacity**: Support 1,000 concurrent active users.
+- **Security**: 0 XSS vulnerabilities, zero unhandled injections, strict Helmet + CSP compliance.
+- **Quality**: 100% strict TypeScript types, full input validation with Zod schemas.

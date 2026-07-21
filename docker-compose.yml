@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shodasha_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: shodasha_db
+      POSTGRES_USER: shodasha_user
+      POSTGRES_PASSWORD: shodasha_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shodasha_user -d shodasha_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    container_name: shodasha_pgbouncer
+    restart: always
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./docker/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./docker/pgbouncer_userlist.txt:/etc/pgbouncer/userlist.txt
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  redis:
+    image: redis:7-alpine
+    container_name: shodasha_redis
+    restart: always
+    command: redis-server --save 60 1 --loglevel notice
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.server
+    container_name: shodasha_server
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      HOST: 0.0.0.0
+      DATABASE_URL: postgres://shodasha_user:shodasha_password@pgbouncer:6432/shodasha_db
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGIN: http://localhost:3000
+      COOKIE_SECRET: shodasha-protest-anonymous-secret-key-32charsmin
+    depends_on:
+      pgbouncer:
+        condition: service_started
+      redis:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+    container_name: shodasha_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
+  redisdata:

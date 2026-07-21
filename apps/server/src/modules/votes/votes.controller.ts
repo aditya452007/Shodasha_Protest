@@ -1,0 +1,21 @@
+import { FastifyRequest, FastifyReply } from 'fastify';
+import { votesService } from './votes.service.js';
+import { voteSchema } from '@shodasha/shared';
+
+export class VotesController {
+  public async vote(
+    req: FastifyRequest<{ Params: { id: string } }>,
+    reply: FastifyReply
+  ) {
+    const { id } = req.params;
+    const { voteValue } = voteSchema.parse(req.body);
+
+    const result = await votesService.voteOnPost(id, voteValue, req.fingerprint);
+    return reply.send({
+      success: true,
+      data: result,
+    });
+  }
+}
+
+export const votesController = new VotesController();

@@ -1,0 +1,29 @@
+{
+  "name": "shodasha-protest",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Public civic discussion and community publishing platform for Jantar Mantar, New Delhi",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,WEB\" -c \"cyan,bold.orange\" \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm run dev --workspace=apps/server",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "services:up": "docker-compose up -d postgres pgbouncer redis",
+    "services:down": "docker-compose down",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:server": "npm run build --workspace=apps/server",
+    "build:web": "npm run build --workspace=apps/web",
+    "build": "npm run build:shared && npm run build:server && npm run build:web",
+    "test": "npm test --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=apps/server",
+    "db:migrate": "npm run db:migrate --workspace=apps/server",
+    "db:seed": "npm run db:seed --workspace=apps/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  }
+}
