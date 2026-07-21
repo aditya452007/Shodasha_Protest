@@ -10,6 +10,8 @@ import { Post } from '@shodasha/shared';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 export default function SearchPage({
   searchParams,
 }: {

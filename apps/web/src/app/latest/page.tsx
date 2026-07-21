@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Post } from '@shodasha/shared';
 import { Metadata } from 'next';
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Latest Updates | Shodasha Civic Forum',
   description: 'Chronological stream of new eyewitness updates, visitor experiences, and public policy perspectives from Jantar Mantar.',

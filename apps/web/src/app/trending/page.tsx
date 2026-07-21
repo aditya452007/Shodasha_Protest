@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Post } from '@shodasha/shared';
 import { Metadata } from 'next';
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Trending | Shodasha Civic Forum',
   description: 'Active civic discussions, upvoted observations, and popular policy reviews at Jantar Mantar.',

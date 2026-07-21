@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Post, CATEGORIES } from '@shodasha/shared';
 import { Metadata, ResolvingMetadata } from 'next';
 
+export const runtime = 'edge';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ page?: string }>;

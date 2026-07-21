@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import React, { use } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PostCard } from '@/components/post/PostCard';
