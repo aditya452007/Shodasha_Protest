@@ -44,8 +44,8 @@ export async function buildApp() {
   await app.register(fastifyCors, {
     origin: config.CORS_ORIGIN,
     credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'X-Client-UUID'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Client-UUID', 'Accept', 'Origin', 'Access-Control-Allow-Origin'],
   });
 
   await app.register(fastifyCookie, {
