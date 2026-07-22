@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Flag, Send } from 'lucide-react';
+import { Flag, Send, MessageSquare } from 'lucide-react';
 import { Textarea } from '../ui/Textarea';
 import { Button } from '../ui/Button';
 import { ReportModal } from '../report/ReportModal';
@@ -48,17 +48,21 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 mt-6">
-      <h3 className="text-lg font-bold text-gray-100 border-b border-gray-800 pb-3">
-        Comments ({comments?.length || 0})
-      </h3>
+    <div className="flex flex-col gap-6 mt-8 pt-6 border-t border-neutral-200">
+      <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+        <h3 className="font-serif font-black text-lg text-neutral-950 uppercase tracking-tight flex items-center gap-2">
+          <MessageSquare className="w-4 h-4 text-neutral-700" />
+          Community Discussion ({comments?.length || 0})
+        </h3>
+        <span className="text-xs font-mono text-neutral-500">Public Comments</span>
+      </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 bg-gray-900/60 border border-gray-800 p-4 rounded-xl">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 bg-white border border-neutral-200 p-5 rounded-lg shadow-sm">
         {/* Honeypot field */}
         <input type="text" name="website_url" className="hidden" tabIndex={-1} autoComplete="off" />
 
         <Textarea
-          placeholder="Share your thoughts on this discussion... (plain text only, max 300 chars)"
+          placeholder="Share your eyewitness perspective or discussion... (plain text only, max 300 chars)"
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           maxLength={COMMENT_LIMITS.BODY_MAX_LENGTH}
@@ -67,39 +71,39 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
         />
 
         {commentMutation.isError && (
-          <p className="text-xs text-red-400 font-medium">
+          <p className="text-xs text-red-600 font-medium">
             {(commentMutation.error as Error).message}
           </p>
         )}
 
-        <div className="flex justify-between items-center">
-          <span className="text-xs text-gray-400">Plain text only. Keep it respectful and civil.</span>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <span className="text-xs text-neutral-500 font-medium">Keep discussions civil and focused on Jantar Mantar civic events.</span>
           <Button
             type="submit"
             isLoading={commentMutation.isPending}
             disabled={!commentText.trim() || commentText.length > COMMENT_LIMITS.BODY_MAX_LENGTH}
-            className="gap-2"
+            className="gap-2 text-xs rounded font-bold px-4 py-2 bg-neutral-950 text-white hover:bg-neutral-800"
           >
-            <Send className="w-4 h-4" />
-            Comment
+            <Send className="w-3.5 h-3.5" />
+            Submit Comment
           </Button>
         </div>
       </form>
 
       {isLoading ? (
         <div className="flex justify-center p-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-orange-500 border-r-2 border-transparent"></div>
+          <div className="animate-spin rounded-full h-6 w-6 border-2 border-neutral-950 border-t-transparent"></div>
         </div>
       ) : comments && comments.length > 0 ? (
         <div className="flex flex-col gap-3">
           {comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-gray-900/40 border border-gray-800/80 rounded-lg p-4 flex flex-col gap-2"
+              className="bg-white border border-neutral-200 rounded-lg p-4 flex flex-col gap-2"
             >
-              <div className="flex justify-between items-center text-xs text-gray-400">
-                <span className="font-semibold text-gray-300">Community Member</span>
-                <div className="flex items-center gap-3">
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-bold text-neutral-900 font-mono uppercase tracking-wider text-[11px]">Civic Participant</span>
+                <div className="flex items-center gap-3 text-neutral-500 font-mono">
                   <span>
                     {new Date(comment.createdAt).toLocaleDateString('en-IN', {
                       month: 'short',
@@ -110,23 +114,25 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
                   </span>
                   <button
                     onClick={() => setReportCommentId(comment.id)}
-                    className="text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
+                    className="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
                     title="Report comment"
                   >
                     <Flag className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
-              <p className="text-sm text-gray-200 leading-relaxed whitespace-pre-line break-words">
+              <p className="text-sm text-neutral-800 leading-relaxed whitespace-pre-line break-words font-sans">
                 {comment.body}
               </p>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-sm text-gray-400 text-center py-6">
-          No comments yet. Be the first to share your perspective.
-        </p>
+        <div className="text-center py-8 bg-neutral-50 border border-neutral-200 rounded-lg">
+          <p className="text-xs text-neutral-500 font-medium">
+            No dispatches yet. Be the first to join the public discussion.
+          </p>
+        </div>
       )}
 
       {reportCommentId && (
@@ -139,3 +145,4 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
     </div>
   );
 };
+

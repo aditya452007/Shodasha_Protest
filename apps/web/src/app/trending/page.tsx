@@ -45,14 +45,16 @@ export default async function TrendingPage({
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-2xl p-8 shadow-md relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="relative z-10">
-          <h1 className="text-3xl font-extrabold text-gray-100 tracking-tight flex items-center gap-3">
-            <span className="text-amber-500">🔥</span> Trending Civic Discussions
+      <div className="bg-white border-2 border-neutral-950 rounded-lg p-8 shadow-sm">
+        <div className="max-w-2xl">
+          <span className="text-[10px] font-mono font-bold text-neutral-950 uppercase tracking-widest bg-neutral-100 px-2.5 py-1 rounded border border-neutral-300">
+            Popular Assembly
+          </span>
+          <h1 className="font-serif text-3xl md:text-4xl font-black text-neutral-950 tracking-tight mt-3">
+            Trending Civic Discussions
           </h1>
-          <p className="text-[15px] text-gray-400 mt-3 max-w-2xl leading-relaxed">
-            Active civic discussions, upvoted observations, and popular policy reviews at Jantar Mantar.
+          <p className="text-xs md:text-sm text-neutral-700 mt-2 leading-relaxed font-sans">
+            Active civic discussions, highly upvoted eyewitness observations, and trending policy reviews at Jantar Mantar.
           </p>
         </div>
       </div>
@@ -67,35 +69,36 @@ export default async function TrendingPage({
             ))}
 
             {meta && meta.totalPages && meta.totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-10 mb-6">
+              <div className="flex justify-center items-center gap-3 mt-10 mb-6">
                 {page > 1 ? (
                   <Link href={`/trending?page=${page - 1}`}>
-                    <Button variant="outline" size="sm" className="rounded-full px-6">Previous</Button>
+                    <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold">Previous</Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" className="rounded-full px-6 opacity-50 cursor-not-allowed" disabled>Previous</Button>
+                  <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold opacity-50 cursor-not-allowed" disabled>Previous</Button>
                 )}
                 
-                <span className="text-sm text-gray-400 font-medium bg-gray-900/50 px-4 py-1.5 rounded-full border border-gray-800">
+                <span className="text-xs font-mono font-semibold text-neutral-700 bg-neutral-100 px-4 py-1.5 rounded border border-neutral-200">
                   Page {page} of {meta.totalPages}
                 </span>
 
                 {page < meta.totalPages ? (
                   <Link href={`/trending?page=${page + 1}`}>
-                    <Button variant="outline" size="sm" className="rounded-full px-6">Next</Button>
+                    <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold">Next</Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" className="rounded-full px-6 opacity-50 cursor-not-allowed" disabled>Next</Button>
+                  <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold opacity-50 cursor-not-allowed" disabled>Next</Button>
                 )}
               </div>
             )}
           </div>
         ) : (
-          <div className="text-center py-16 bg-gray-900/40 border border-gray-800 rounded-2xl shadow-sm">
-            <p className="text-gray-400 text-sm font-medium">No trending posts yet.</p>
+          <div className="text-center py-16 bg-neutral-50 border border-neutral-200 rounded-lg">
+            <p className="text-neutral-600 text-xs font-medium">No trending dispatches yet.</p>
           </div>
         )}
       </div>
     </div>
   );
 }
+

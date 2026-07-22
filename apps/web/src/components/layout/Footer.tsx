@@ -4,78 +4,85 @@ import { Users, ShieldCheck, Landmark, Twitter, Github, Mail, MapPin } from 'luc
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-950 border-t border-gray-800/60 mt-16 pt-16 pb-8">
+    <footer className="bg-neutral-50 border-t-2 border-neutral-950 mt-20 pt-14 pb-10">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand Column */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group inline-flex">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
-                <Landmark className="w-4 h-4" />
+          <div className="md:col-span-2 space-y-4">
+            <Link href="/" className="flex items-center gap-2.5 inline-flex group">
+              <div className="w-8 h-8 rounded bg-neutral-950 flex items-center justify-center text-white font-bold">
+                <Landmark className="w-4 h-4 text-amber-400" />
               </div>
-              <div>
-                <span className="font-extrabold text-md tracking-wider text-gray-100 uppercase leading-none">
+              <div className="flex flex-col">
+                <span className="font-serif font-black text-lg tracking-tight text-neutral-950 uppercase leading-none">
                   SHODASHA
+                </span>
+                <span className="text-[9px] text-neutral-500 font-bold uppercase tracking-widest leading-none mt-1">
+                  Jantar Mantar Civic Forum
                 </span>
               </div>
             </Link>
-            <p className="text-[14px] text-gray-400 max-w-sm leading-relaxed mb-6">
-              An open, public community publishing platform documenting peaceful demonstrations, visitor perspectives, policy discussions, and eyewitness updates at Jantar Mantar, New Delhi.
+            <p className="text-xs text-neutral-600 max-w-md leading-relaxed">
+              An open civic publication and community discussion platform documenting peaceful demonstrations, policy analyses, eyewitness updates, and visitor perspectives centered at Jantar Mantar, New Delhi.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-9 h-9 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
-                <Twitter className="w-4 h-4" />
+            <div className="flex items-center gap-3 pt-2">
+              <a href="#" className="w-8 h-8 rounded border border-neutral-300 bg-white flex items-center justify-center text-neutral-700 hover:text-white hover:bg-neutral-950 hover:border-neutral-950 transition-colors" aria-label="Twitter">
+                <Twitter className="w-3.5 h-3.5" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
-                <Github className="w-4 h-4" />
+              <a href="#" className="w-8 h-8 rounded border border-neutral-300 bg-white flex items-center justify-center text-neutral-700 hover:text-white hover:bg-neutral-950 hover:border-neutral-950 transition-colors" aria-label="Github">
+                <Github className="w-3.5 h-3.5" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
-                <Mail className="w-4 h-4" />
+              <a href="#" className="w-8 h-8 rounded border border-neutral-300 bg-white flex items-center justify-center text-neutral-700 hover:text-white hover:bg-neutral-950 hover:border-neutral-950 transition-colors" aria-label="Contact Email">
+                <Mail className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
-          {/* Links Column 1 */}
+          {/* Directory Links Column 1 */}
           <div>
-            <h4 className="font-bold text-gray-100 text-[13px] tracking-wider uppercase mb-4">Platform</h4>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">All Discussions</Link></li>
-              <li><Link href="/trending" className="text-sm text-gray-400 hover:text-white transition-colors">Trending Topics</Link></li>
-              <li><Link href="/latest" className="text-sm text-gray-400 hover:text-white transition-colors">Latest Updates</Link></li>
-              <li><Link href="/create" className="text-sm text-gray-400 hover:text-white transition-colors">Submit Report</Link></li>
+            <h4 className="font-serif font-bold text-neutral-950 text-xs tracking-wider uppercase mb-4 border-b border-neutral-200 pb-2">
+              Directory
+            </h4>
+            <ul className="space-y-2.5 text-xs">
+              <li><Link href="/" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">All Dispatches</Link></li>
+              <li><Link href="/trending" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Trending Rallies</Link></li>
+              <li><Link href="/latest" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Eyewitness Feed</Link></li>
+              <li><Link href="/create" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Submit Report</Link></li>
             </ul>
           </div>
 
-          {/* Links Column 2 */}
+          {/* Directory Links Column 2 */}
           <div>
-            <h4 className="font-bold text-gray-100 text-[13px] tracking-wider uppercase mb-4">Community</h4>
-            <ul className="space-y-3">
-              <li><Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Guidelines</Link></li>
-              <li><Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Moderation Policy</Link></li>
-              <li><Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+            <h4 className="font-serif font-bold text-neutral-950 text-xs tracking-wider uppercase mb-4 border-b border-neutral-200 pb-2">
+              Civic Standards
+            </h4>
+            <ul className="space-y-2.5 text-xs">
+              <li><Link href="#" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Community Guidelines</Link></li>
+              <li><Link href="#" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Eyewitness Verification</Link></li>
+              <li><Link href="#" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Terms of Service</Link></li>
+              <li><Link href="#" className="text-neutral-700 hover:text-neutral-950 hover:underline transition-colors font-medium">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-800/60 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Shodasha Civic Forum. Open Source.
+        <div className="pt-6 border-t border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] text-neutral-500 font-medium">
+            &copy; {new Date().getFullYear()} Shodasha Civic Forum. Open Access Citizen Platform.
           </p>
           
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400">
-            <div className="flex items-center gap-2 bg-gray-900/50 px-3 py-1.5 rounded-full border border-gray-800/50">
-              <Users className="w-3.5 h-3.5 text-amber-500" />
-              <span>Open Dialogue</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-neutral-700 font-medium">
+            <div className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded border border-neutral-200">
+              <Users className="w-3 h-3 text-amber-600" />
+              <span>Public Civic Forum</span>
             </div>
-            <div className="flex items-center gap-2 bg-gray-900/50 px-3 py-1.5 rounded-full border border-gray-800/50">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Moderated</span>
+            <div className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded border border-neutral-200">
+              <ShieldCheck className="w-3 h-3 text-emerald-600" />
+              <span>Fact Moderated</span>
             </div>
-            <div className="flex items-center gap-2 bg-gray-900/50 px-3 py-1.5 rounded-full border border-gray-800/50">
-              <MapPin className="w-3.5 h-3.5 text-orange-400" />
-              <span>New Delhi, IN</span>
+            <div className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded border border-neutral-200">
+              <MapPin className="w-3 h-3 text-red-600" />
+              <span>Jantar Mantar, New Delhi</span>
             </div>
           </div>
         </div>
@@ -83,3 +90,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

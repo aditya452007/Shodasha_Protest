@@ -23,17 +23,17 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
   if (isLoading) {
     return (
       <div className="flex justify-center py-16">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-orange-500 border-r-2 border-transparent" />
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-neutral-950 border-t-transparent" />
       </div>
     );
   }
 
   if (isError || !post) {
     return (
-      <div className="text-center py-16 bg-gray-900/40 border border-gray-800 rounded-xl p-8 max-w-lg mx-auto">
-        <h2 className="text-xl font-bold text-gray-100">Post Not Found</h2>
-        <p className="text-sm text-gray-400 mt-2">
-          {error ? (error as Error).message : 'This post may have been removed or flagged.'}
+      <div className="text-center py-16 bg-neutral-50 border border-neutral-200 rounded-lg p-8 max-w-lg mx-auto">
+        <h2 className="font-serif text-xl font-bold text-neutral-950">Dispatch Not Found</h2>
+        <p className="text-xs text-neutral-600 mt-2 font-medium">
+          {error ? (error as Error).message : 'This dispatch may have been removed or flagged for review.'}
         </p>
       </div>
     );
@@ -46,3 +46,4 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
     </div>
   );
 }
+

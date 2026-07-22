@@ -55,13 +55,13 @@ export const ReportModal: React.FC<ReportModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Report Inappropriate Content">
       {successMsg ? (
-        <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium text-center">
+        <div className="p-4 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold text-center">
           {successMsg}
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-bold text-neutral-950 uppercase tracking-wider mb-2">
               Reason for Report
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -70,10 +70,10 @@ export const ReportModal: React.FC<ReportModalProps> = ({
                   key={reason}
                   type="button"
                   onClick={() => setSelectedReason(reason)}
-                  className={`px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider border transition-all cursor-pointer ${
+                  className={`px-3 py-2 rounded text-xs font-bold uppercase tracking-wider border transition-all cursor-pointer ${
                     selectedReason === reason
-                      ? 'bg-orange-500/20 text-orange-400 border-orange-500'
-                      : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700'
+                      ? 'bg-neutral-950 text-white border-neutral-950 shadow-sm'
+                      : 'bg-neutral-50 text-neutral-700 border-neutral-200 hover:bg-neutral-100 hover:border-neutral-950'
                   }`}
                 >
                   {reason.replace('_', ' ')}
@@ -92,16 +92,16 @@ export const ReportModal: React.FC<ReportModalProps> = ({
           />
 
           {reportMutation.isError && (
-            <p className="text-xs text-red-400 font-medium">
+            <p className="text-xs text-red-600 font-medium">
               {(reportMutation.error as Error).message}
             </p>
           )}
 
           <div className="flex justify-end gap-3 mt-2">
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={onClose} className="text-xs font-bold">
               Cancel
             </Button>
-            <Button type="submit" variant="danger" isLoading={reportMutation.isPending}>
+            <Button type="submit" variant="danger" isLoading={reportMutation.isPending} className="text-xs font-bold">
               Submit Report
             </Button>
           </div>
@@ -110,3 +110,4 @@ export const ReportModal: React.FC<ReportModalProps> = ({
     </Modal>
   );
 };
+

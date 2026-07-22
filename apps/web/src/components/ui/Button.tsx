@@ -16,19 +16,19 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-lg active:scale-98 min-h-[44px] min-w-[44px] px-4 select-none cursor-pointer';
+    'inline-flex items-center justify-center font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:pointer-events-none rounded-md active:scale-[0.98] min-h-[44px] min-w-[44px] px-4 select-none cursor-pointer';
 
   const variants = {
     primary:
-      'bg-orange-600 text-white hover:bg-orange-500 focus:ring-orange-500 bg-gradient-to-r from-orange-600 to-amber-600 border border-orange-500/20 shadow-sm',
+      'bg-neutral-950 text-white hover:bg-neutral-800 focus:ring-neutral-950 border border-neutral-950 shadow-sm font-semibold',
     secondary:
-      'bg-gray-800 text-gray-100 hover:bg-gray-700 focus:ring-gray-500 border border-gray-700',
+      'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus:ring-neutral-950 border border-neutral-300 font-semibold',
     danger:
-      'bg-red-600 text-white hover:bg-red-500 focus:ring-red-500 border border-red-500/20',
+      'bg-red-600 text-white hover:bg-red-700 focus:ring-red-600 border border-red-600 font-semibold',
     outline:
-      'bg-transparent text-gray-200 border border-gray-700 hover:bg-gray-800 focus:ring-gray-500',
+      'bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-50 hover:border-neutral-950 focus:ring-neutral-950 font-medium',
     ghost:
-      'bg-transparent text-gray-300 hover:bg-gray-800/60 hover:text-white focus:ring-gray-500',
+      'bg-transparent text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950 focus:ring-neutral-950 font-medium',
   };
 
   const sizes = {
@@ -70,3 +70,4 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+

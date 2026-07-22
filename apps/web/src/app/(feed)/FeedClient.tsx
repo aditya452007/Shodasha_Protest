@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { PostCard } from '@/components/post/PostCard';
 import { CategoryNav } from '@/components/layout/CategoryNav';
 import { Button } from '@/components/ui/Button';
+import { FeedViewToggle, FeedViewMode } from '@/components/post/FeedViewToggle';
 import { useSSE } from '@/hooks/useSSE';
 import { fetchApi } from '@/lib/api';
 import { Post } from '@shodasha/shared';
@@ -13,6 +14,7 @@ export function FeedClient() {
   useSSE();
   const [sort, setSort] = useState<'trending' | 'latest' | 'top'>('trending');
   const [page, setPage] = useState(1);
+  const [viewMode, setViewMode] = useState<FeedViewMode>('cards');
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['posts', sort, page],
@@ -29,31 +31,39 @@ export function FeedClient() {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      {/* Banner - Modern Minimalist */}
-      <div className="bg-gradient-to-br from-[var(--bg-card)] to-gray-950 border border-[var(--border-color)] rounded-2xl p-8 shadow-md relative overflow-hidden">
-        {/* Subtle decorative elements for premium look */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
-        
-        <div className="relative z-10">
-          <span className="inline-flex items-center text-[11px] font-bold uppercase tracking-widest text-orange-500 bg-orange-500/10 px-3 py-1.5 rounded-full">
-            Jantar Mantar Public Forum
+      {/* Newspaper Masthead Hero Banner */}
+      <div className="bg-white border-2 border-neutral-950 rounded-lg p-8 shadow-sm relative overflow-hidden">
+        <div className="flex items-center justify-between border-b border-neutral-200 pb-3 mb-4">
+          <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-neutral-950 bg-neutral-100 px-3 py-1 rounded border border-neutral-300 font-mono">
+            Official Civic Dispatch • New Delhi
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] mt-5">
-            Civic Discussion <br className="hidden md:block"/>& Event Portal
+          <span className="text-xs font-mono text-neutral-500 hidden sm:inline">
+            Jantar Mantar Open Forum
+          </span>
+        </div>
+        
+        <div className="relative z-10 max-w-3xl">
+          <h1 className="font-serif text-3xl md:text-5xl font-black tracking-tight text-neutral-950 leading-tight">
+            Jantar Mantar Public Assembly & Civic Forum
           </h1>
-          <p className="text-[15px] text-[var(--text-secondary)] mt-4 max-w-2xl leading-relaxed">
-            A transparent community platform to share visitor experiences, eyewitness event updates, policy discussions, and peaceful rally perspectives at Jantar Mantar, New Delhi.
+          <p className="text-sm md:text-base text-neutral-700 mt-3 leading-relaxed font-sans max-w-2xl">
+            A transparent citizen publishing portal providing verified eyewitness accounts, peaceful rally perspectives, law reviews, and community updates centered at Jantar Mantar, New Delhi.
           </p>
         </div>
       </div>
 
       <CategoryNav />
 
-      {/* Feed Filter Sub-Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[var(--border-color)] pb-4 gap-4 mt-2">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Jantar Mantar Civic Feed</h2>
-        <div className="flex bg-[var(--bg-card)] border border-[var(--border-color)] rounded-lg p-1 shadow-sm">
+      {/* Feed Filter Sub-Bar & View Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-neutral-200 pb-3 gap-4 mt-1">
+        <div className="flex items-center gap-3">
+          <h2 className="font-serif text-lg font-bold text-neutral-950 tracking-tight uppercase">
+            Public Dispatches
+          </h2>
+          <FeedViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
+        </div>
+
+        <div className="flex bg-neutral-100 border border-neutral-200 rounded p-1">
           {(['trending', 'latest', 'top'] as const).map((s) => (
             <button
               key={s}
@@ -62,10 +72,10 @@ export function FeedClient() {
                 setSort(s);
                 setPage(1);
               }}
-              className={`px-4 py-1.5 text-sm font-semibold transition-all duration-200 cursor-pointer rounded-md ${
+              className={`px-3.5 py-1 text-xs font-bold transition-all duration-150 cursor-pointer rounded ${
                 sort === s
-                  ? 'bg-gray-800 text-white shadow-sm'
-                  : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+                  ? 'bg-neutral-950 text-white shadow-sm'
+                  : 'text-neutral-700 hover:text-neutral-950 hover:bg-neutral-200/70'
               }`}
             >
               {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -81,33 +91,33 @@ export function FeedClient() {
             {[1, 2, 3, 4].map((n) => (
               <div
                 key={n}
-                className="h-44 bg-gray-900/60 border border-gray-800/80 rounded-xl animate-pulse"
+                className="h-44 bg-neutral-100/80 border border-neutral-200 rounded-lg animate-pulse"
               />
             ))}
           </div>
         ) : isError ? (
-          <div className="p-6 rounded-xl bg-red-500/10 border border-red-500/20 text-center text-red-400 text-sm font-medium">
-            Failed to load posts: {(error as Error).message}
+          <div className="p-6 rounded-lg bg-red-50 border border-red-200 text-center text-red-700 text-xs font-semibold">
+            Failed to load dispatches: {(error as Error).message}
           </div>
         ) : posts.length > 0 ? (
-          <div className="flex flex-col gap-4">
+          <div className={viewMode === 'compact' ? "flex flex-col gap-2" : "flex flex-col gap-4"}>
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
 
             {/* Pagination Controls */}
             {meta && meta.totalPages && meta.totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-10 mb-6">
+              <div className="flex justify-center items-center gap-3 mt-10 mb-6">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="rounded-full px-6"
+                  className="rounded px-5 text-xs font-bold"
                 >
                   Previous
                 </Button>
-                <span className="text-sm text-gray-400 font-medium bg-gray-900/50 px-4 py-1.5 rounded-full border border-gray-800">
+                <span className="text-xs font-mono font-semibold text-neutral-700 bg-neutral-100 px-4 py-1.5 rounded border border-neutral-200">
                   Page {page} of {meta.totalPages}
                 </span>
                 <Button
@@ -115,7 +125,7 @@ export function FeedClient() {
                   size="sm"
                   onClick={() => setPage((p) => Math.min(meta.totalPages || 1, p + 1))}
                   disabled={page >= meta.totalPages}
-                  className="rounded-full px-6"
+                  className="rounded px-5 text-xs font-bold"
                 >
                   Next
                 </Button>
@@ -123,11 +133,13 @@ export function FeedClient() {
             )}
           </div>
         ) : (
-          <div className="text-center py-16 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-sm">
-            <p className="text-gray-400 text-sm font-medium">No posts found in this feed.</p>
+          <div className="text-center py-16 bg-neutral-50 border border-neutral-200 rounded-lg">
+            <p className="text-neutral-600 text-xs font-medium">No dispatches found in this category.</p>
           </div>
         )}
       </div>
     </div>
   );
 }
+
+

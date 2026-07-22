@@ -48,38 +48,37 @@ export default function SearchPage({
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      <div className="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-2xl p-8 shadow-md relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="relative z-10">
-          <h1 className="text-3xl font-extrabold text-gray-100 tracking-tight flex items-center gap-3">
-            <Search className="w-8 h-8 text-amber-500" />
-            Full-Text Civic Search
+      <div className="bg-white border-2 border-neutral-950 rounded-lg p-8 shadow-sm">
+        <div className="max-w-2xl">
+          <h1 className="font-serif text-2xl md:text-3xl font-black text-neutral-950 tracking-tight flex items-center gap-2.5">
+            <Search className="w-6 h-6 text-neutral-950" />
+            Full-Text Civic Search Archive
           </h1>
-          <p className="text-[15px] text-gray-400 mt-3 max-w-2xl leading-relaxed">
-            Search Jantar Mantar peaceful rallies, policy reviews, visitor accounts, and eyewitness event updates.
+          <p className="text-xs md:text-sm text-neutral-700 mt-2 leading-relaxed font-sans">
+            Search Jantar Mantar peaceful rallies, policy reviews, visitor accounts, and eyewitness event dispatches.
           </p>
         </div>
       </div>
 
-      <form onSubmit={handleSearchSubmit} className="flex gap-3">
+      <form onSubmit={handleSearchSubmit} className="flex gap-2">
         <div className="relative flex-1 group">
-          <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-amber-500 transition-colors" />
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-neutral-950 transition-colors" />
           <input
             name="q"
             type="text"
             defaultValue={activeQuery}
             placeholder="Type keywords (e.g. farmers advocacy, transport accessibility, environmental bill)..."
-            className="w-full bg-gray-900 border border-gray-800 rounded-full pl-12 pr-4 py-3.5 text-[15px] text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500/50 transition-all shadow-inner"
+            className="w-full bg-white border border-neutral-300 rounded-md pl-10 pr-4 py-2.5 text-xs md:text-sm text-neutral-950 placeholder-neutral-400 focus:outline-none focus:border-neutral-950 focus:ring-1 focus:ring-neutral-950 transition-all"
           />
         </div>
-        <Button type="submit" variant="primary" className="rounded-full px-8">
-          Search
+        <Button type="submit" variant="primary" className="rounded-md px-6 text-xs font-bold bg-neutral-950 text-white hover:bg-neutral-800">
+          Search Archive
         </Button>
       </form>
 
       {activeQuery && (
-        <p className="text-sm text-gray-400 font-medium">
-          Showing search results for <span className="text-amber-400 font-bold">&quot;{activeQuery}&quot;</span> ({meta?.total || 0} matches)
+        <p className="text-xs font-mono text-neutral-600">
+          Search results for <span className="text-neutral-950 font-bold font-sans">&quot;{activeQuery}&quot;</span> ({meta?.total || 0} matches)
         </p>
       )}
 
@@ -87,7 +86,7 @@ export default function SearchPage({
         {isLoading ? (
           <div className="flex flex-col gap-4">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="h-44 bg-gray-900/60 border border-gray-800/80 rounded-xl animate-pulse" />
+              <div key={n} className="h-44 bg-neutral-100/80 border border-neutral-200 rounded-lg animate-pulse" />
             ))}
           </div>
         ) : posts.length > 0 ? (
@@ -97,33 +96,33 @@ export default function SearchPage({
             ))}
 
             {meta && meta.totalPages && meta.totalPages > 1 && (
-              <div className="flex justify-center items-center gap-4 mt-10 mb-6">
+              <div className="flex justify-center items-center gap-3 mt-10 mb-6">
                 {page > 1 ? (
                   <Link href={`/search?q=${encodeURIComponent(activeQuery)}&page=${page - 1}`}>
-                    <Button variant="outline" size="sm" className="rounded-full px-6">Previous</Button>
+                    <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold">Previous</Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" className="rounded-full px-6 opacity-50 cursor-not-allowed" disabled>Previous</Button>
+                  <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold opacity-50 cursor-not-allowed" disabled>Previous</Button>
                 )}
                 
-                <span className="text-sm text-gray-400 font-medium bg-gray-900/50 px-4 py-1.5 rounded-full border border-gray-800">
+                <span className="text-xs font-mono font-semibold text-neutral-700 bg-neutral-100 px-4 py-1.5 rounded border border-neutral-200">
                   Page {page} of {meta.totalPages}
                 </span>
 
                 {page < meta.totalPages ? (
                   <Link href={`/search?q=${encodeURIComponent(activeQuery)}&page=${page + 1}`}>
-                    <Button variant="outline" size="sm" className="rounded-full px-6">Next</Button>
+                    <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold">Next</Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" className="rounded-full px-6 opacity-50 cursor-not-allowed" disabled>Next</Button>
+                  <Button variant="outline" size="sm" className="rounded px-5 text-xs font-bold opacity-50 cursor-not-allowed" disabled>Next</Button>
                 )}
               </div>
             )}
           </div>
         ) : activeQuery ? (
-          <div className="text-center py-16 bg-gray-900/40 border border-gray-800 rounded-2xl shadow-sm">
-            <p className="text-gray-400 text-[15px] font-medium">
-              No matching updates found for &quot;{activeQuery}&quot;.
+          <div className="text-center py-16 bg-neutral-50 border border-neutral-200 rounded-lg">
+            <p className="text-neutral-600 text-xs font-medium">
+              No matching dispatches found for &quot;{activeQuery}&quot;.
             </p>
           </div>
         ) : null}
@@ -131,3 +130,4 @@ export default function SearchPage({
     </div>
   );
 }
+

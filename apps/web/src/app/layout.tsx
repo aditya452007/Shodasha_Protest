@@ -4,9 +4,10 @@ import Providers from '@/lib/providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' });
 
 const getMetadataBase = (): URL => {
   let url = process.env.NEXT_PUBLIC_APP_URL?.trim();
@@ -26,7 +27,7 @@ const getMetadataBase = (): URL => {
 export const metadata: Metadata = {
   title: {
     template: '%s | Shodasha Civic Forum',
-    default: 'Shodasha | Jantar Mantar Public Civic Discussion Platform',
+    default: 'Shodasha | Jantar Mantar Public Civic Discussion Forum',
   },
   description:
     'A transparent public civic discussion and community publishing forum focused on peaceful demonstrations, policy reviews, visitor accounts, and eyewitness updates at Jantar Mantar, New Delhi.',
@@ -83,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         <Script
           id="json-ld"
@@ -91,13 +92,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans bg-gray-950 text-gray-100 min-h-screen flex flex-col antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable} font-sans bg-white text-neutral-950 min-h-screen flex flex-col antialiased selection:bg-neutral-950 selection:text-white`} suppressHydrationWarning>
         <Providers>
           <Header />
-          <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-6">{children}</main>
+          <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">{children}</main>
           <Footer />
         </Providers>
       </body>
     </html>
   );
 }
+
