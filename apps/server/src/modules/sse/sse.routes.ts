@@ -3,6 +3,11 @@ import { sseService } from './sse.service.js';
 
 export async function sseRoutes(fastify: FastifyInstance) {
   fastify.get('/api/v1/posts/stream', async (req, reply) => {
+    const reqOrigin = req.headers.origin;
+    if (reqOrigin) {
+      reply.raw.setHeader('Access-Control-Allow-Origin', reqOrigin);
+      reply.raw.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
     reply.raw.setHeader('Content-Type', 'text/event-stream');
     reply.raw.setHeader('Cache-Control', 'no-cache, no-transform');
     reply.raw.setHeader('Connection', 'keep-alive');

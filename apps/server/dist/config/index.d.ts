@@ -4,7 +4,7 @@ export declare const config: {
     HOST: string;
     DATABASE_URL: string;
     REDIS_URL: string;
-    CORS_ORIGIN: string;
+    CORS_ORIGIN: string[];
     COOKIE_SECRET: string;
     LOG_LEVEL: "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 };
