@@ -4,13 +4,14 @@ import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { SSEUpdatePayload } from '@shodasha/shared';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+import { getApiBaseUrl } from '@/lib/api';
 
 export function useSSE() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const eventSource = new EventSource(`${API_BASE_URL}/api/v1/posts/stream`, {
+    const baseUrl = getApiBaseUrl();
+    const eventSource = new EventSource(`${baseUrl}/api/v1/posts/stream`, {
       withCredentials: true,
     });
 

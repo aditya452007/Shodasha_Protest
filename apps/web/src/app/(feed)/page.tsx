@@ -1,10 +1,12 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { FeedClient } from './FeedClient';
 
+import { getApiBaseUrl } from '@/lib/api';
+
 // Helper to fetch data on the server
 async function fetchPostsServer(sort: string, page: number) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    const apiUrl = getApiBaseUrl();
     const res = await fetch(`${apiUrl}/api/v1/posts?sort=${sort}&page=${page}&limit=20`, {
       next: { revalidate: 60 }
     });

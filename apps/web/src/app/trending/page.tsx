@@ -13,9 +13,11 @@ export const metadata: Metadata = {
   description: 'Active civic discussions, upvoted observations, and popular policy reviews at Jantar Mantar.',
 };
 
+import { getApiBaseUrl } from '@/lib/api';
+
 async function fetchTrendingPosts(page: number) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    const apiUrl = getApiBaseUrl();
     const res = await fetch(`${apiUrl}/api/v1/posts?sort=trending&page=${page}&limit=20`, {
       next: { revalidate: 60 }
     });

@@ -13,10 +13,12 @@ export const metadata: Metadata = {
   description: 'Chronological stream of new eyewitness updates, visitor experiences, and public policy perspectives from Jantar Mantar.',
 };
 
+import { getApiBaseUrl } from '@/lib/api';
+
 // Helper to fetch data on the server
 async function fetchLatestPosts(page: number) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    const apiUrl = getApiBaseUrl();
     const res = await fetch(`${apiUrl}/api/v1/posts?sort=latest&page=${page}&limit=20`, {
       next: { revalidate: 30 }
     });

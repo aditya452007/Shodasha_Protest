@@ -28,9 +28,11 @@ export async function generateMetadata(
   };
 }
 
+import { getApiBaseUrl } from '@/lib/api';
+
 async function fetchCategoryPosts(slug: string, page: number) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+    const apiUrl = getApiBaseUrl();
     const res = await fetch(`${apiUrl}/api/v1/posts?category=${slug}&page=${page}&limit=20`, {
       next: { revalidate: 60 }
     });
