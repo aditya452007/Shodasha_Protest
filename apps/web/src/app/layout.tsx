@@ -8,6 +8,21 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
+const getMetadataBase = (): URL => {
+  let url = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  if (!url) {
+    return new URL('http://localhost:3000');
+  }
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = `https://${url}`;
+  }
+  try {
+    return new URL(url);
+  } catch {
+    return new URL('http://localhost:3000');
+  }
+};
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Shodasha Civic Forum',
@@ -26,7 +41,7 @@ export const metadata: Metadata = {
     'Policy Discussion India',
   ],
   authors: [{ name: 'Shodasha Civic Forum' }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: getMetadataBase(),
   openGraph: {
     title: 'Shodasha - Jantar Mantar Public Civic Discussion Platform',
     description:
